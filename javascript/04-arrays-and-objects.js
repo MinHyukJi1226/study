@@ -73,13 +73,27 @@ console.log(user.address?.city ?? '주소 없음'); // 주소 없음
 // 선언되지 않은 변수나 모든 종류의 오류를 막는 기능은 아니에요.
 
 // 6. 참조와 비교
-const sharedUser = user; // 객체 복제가 아니라 같은 객체를 공유
+// 객체를 다른 변수에 할당하면 복제되지 않고 같은 객체를 공유해요.
+const sharedUser = user;
 sharedUser.age = 99;
-console.log(user.age); // 99
-console.log(sharedUser === user); // true: 같은 객체
-console.log({ name: 'Min' } === { name: 'Min' }); // false: 서로 다른 객체
-console.log([1, 2] === [1, 2]); // false
 
+console.log(user.age); // 99: 같은 객체이므로 user에서도 변경된 값이 보여요.
+console.log(sharedUser === user); // true: 같은 객체
+
+// 객체는 내용이 같아도 별도로 만들면 서로 다른 객체예요.
+const userA = { name: 'Min' };
+const userB = { name: 'Min' };
+
+console.log(userA === userB); // false: 서로 다른 객체
+console.log(userA.name === userB.name); // true: 속성의 문자열 값은 같아요.
+
+// 배열도 객체와 동일하게 비교해요.
+const numbersA = [1, 2];
+const numbersB = [1, 2];
+const sharedNumbers = numbersA;
+
+console.log(numbersA === numbersB); // false: 서로 다른 배열
+console.log(numbersA === sharedNumbers); // true: 같은 배열
 // 7. 전개 구문(spread): 배열 요소나 객체 속성을 펼쳐요.
 const moreFruits = [...fruits, 'peach'];
 const updatedUser = { ...user, age: 22 }; // 뒤에 쓴 속성이 앞의 속성을 덮어써요.
